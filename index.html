@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Vrundhavan Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--rose:#6B1D3B;--rose-l:#9B2D5A;--rose-pale:#FDF0F4;--gold:#C9A84C;--gold-l:#E8C87A;--cream:#FDF6EE;--text:#2C1810;--text-l:#8B6F6F;--border:#E8D5C4;--white:#fff}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);min-height:100vh}
+.nav{background:var(--rose);padding:0 1.5rem;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(107,29,59,.3)}
+.nav-brand{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:#fff;cursor:pointer;letter-spacing:.02em}
+.nav-brand span{color:var(--gold-l)}
+.nav-back{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;padding:.4rem .9rem;font-size:.85rem;cursor:pointer;font-family:inherit}
+.nav-admin{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);border-radius:8px;padding:.3rem .7rem;font-size:.75rem;cursor:pointer;font-family:inherit}
+.home-hero{text-align:center;padding:3.5rem 1.5rem 2rem;background:linear-gradient(180deg,rgba(107,29,59,.06) 0%,transparent 100%)}
+.ornament{color:var(--gold);font-size:1.1rem;letter-spacing:.5em;margin-bottom:1rem}
+.home-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,3.8rem);color:var(--rose);font-weight:600;line-height:1.1;margin-bottom:.8rem}
+.home-hero p{color:var(--text-l);font-size:1rem;letter-spacing:.02em}
+.home-divider{display:flex;align-items:center;gap:.8rem;max-width:280px;margin:2rem auto}
+.home-divider::before,.home-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+.home-divider span{color:var(--gold);font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;white-space:nowrap}
+.category-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;max-width:560px;margin:0 auto;padding:0 1.5rem 4rem}
+.cat-card{position:relative;border-radius:20px;overflow:hidden;cursor:pointer;aspect-ratio:3/4;border:none;padding:0;background:none;transition:transform .25s,box-shadow .25s;text-align:center}
+.cat-card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,.2)}
+.cat-inner{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:1.5rem}
+.cat-sarees .cat-inner{background:linear-gradient(180deg,#7B2245 0%,#4A0E25 60%,#2C0716 100%)}
+.cat-acc .cat-inner{background:linear-gradient(180deg,#C9A84C 0%,#9C7A2A 60%,#6B4F10 100%)}
+.cat-emoji{font-size:3.5rem;margin-bottom:.8rem}
+.cat-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:600;color:#fff;margin-bottom:.25rem}
+.cat-count{font-size:.76rem;color:rgba(255,255,255,.6);margin-bottom:.8rem}
+.cat-arrow{width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;margin:0 auto}
+.page-header{background:var(--rose);padding:2rem 1.5rem 1.5rem;color:#fff}
+.page-header h2{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:500;margin-bottom:.2rem}
+.page-header p{font-size:.85rem;color:rgba(255,255,255,.65)}
+.product-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;padding:1.5rem;max-width:1000px;margin:0 auto}
+.product-card{background:var(--white);border-radius:16px;overflow:hidden;cursor:pointer;border:1px solid var(--border);transition:transform .2s,box-shadow .2s;position:relative}
+.product-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(107,29,59,.15)}
+.product-card img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.new-badge{position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#E8293A,#C0182A);color:#fff;font-size:.68rem;font-weight:700;letter-spacing:.1em;padding:.28rem .62rem;border-radius:20px;text-transform:uppercase;box-shadow:0 2px 8px rgba(220,30,50,.45);animation:badgePop .4s cubic-bezier(.18,.89,.32,1.28)}
+@keyframes badgePop{from{transform:scale(0.4);opacity:0}to{transform:scale(1);opacity:1}}
+
+.pc-body{padding:.8rem}
+.pc-body h3{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--rose);font-weight:600;margin-bottom:.2rem;line-height:1.3}
+.pc-body p{font-size:.75rem;color:var(--text-l);overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.pc-tap{font-size:.72rem;color:var(--gold);font-weight:500;margin-top:.4rem}
+.empty-state{text-align:center;padding:5rem 1.5rem;color:var(--text-l)}
+.empty-state .ei{font-size:3.5rem;margin-bottom:1rem}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;display:flex;align-items:flex-end;justify-content:center}
+@media(min-width:500px){.modal-overlay{align-items:center;padding:1rem}}
+.modal{background:var(--white);border-radius:24px 24px 0 0;max-width:460px;width:100%;overflow:hidden;animation:slideUp .3s ease}
+@media(min-width:500px){.modal{border-radius:24px}}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-img-wrap{position:relative}
+.modal img{width:100%;max-height:300px;object-fit:cover;display:block}
+.modal-new-badge{position:absolute;top:14px;left:14px;background:linear-gradient(135deg,#E8293A,#C0182A);color:#fff;font-size:.75rem;font-weight:700;letter-spacing:.1em;padding:.35rem .8rem;border-radius:20px;text-transform:uppercase;box-shadow:0 2px 10px rgba(220,30,50,.5)}
+.modal-body{padding:1.5rem}
+.modal-cat{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:500;margin-bottom:.4rem}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--rose);font-weight:600;margin-bottom:.4rem}
+.modal-added{font-size:.74rem;color:var(--text-l);margin-bottom:.5rem}
+.modal-desc{font-size:.88rem;color:var(--text-l);margin-bottom:1rem;line-height:1.6}
+.modal-msg{background:var(--rose-pale);border-radius:12px;padding:.9rem 1rem;font-size:.88rem;color:var(--rose);margin-bottom:1.2rem;text-align:center;line-height:1.5;border:1px solid rgba(107,29,59,.1)}
+.modal-msg strong{display:block;font-size:1rem;margin-bottom:.2rem;font-family:'Cormorant Garamond',serif}
+.modal-btns{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.btn-see{background:var(--white);border:1.5px solid var(--border);color:var(--text);border-radius:12px;padding:.85rem;font-size:.9rem;font-weight:500;cursor:pointer;font-family:inherit;transition:border-color .2s}
+.btn-see:hover{border-color:var(--rose)}
+.btn-confirm{background:#25D366;border:none;color:#fff;border-radius:12px;padding:.85rem;font-size:.9rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;display:flex;align-items:center;justify-content:center;gap:.4rem}
+.btn-confirm:hover{background:#1da851}
+.wa-icon{width:18px;height:18px;flex-shrink:0}
+.admin-login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.al-card{background:var(--white);border-radius:24px;padding:2.5rem;max-width:380px;width:100%;border:1px solid var(--border);text-align:center;box-shadow:0 8px 30px rgba(0,0,0,.06)}
+.al-card h2{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--rose);margin-bottom:.4rem}
+.al-card p{font-size:.85rem;color:var(--text-l);margin-bottom:1.8rem}
+.inp{width:100%;padding:.8rem 1rem;border:1.5px solid var(--border);border-radius:10px;font-size:.95rem;font-family:inherit;outline:none;transition:border-color .2s;background:var(--cream);color:var(--text)}
+.inp:focus{border-color:var(--rose)}
+textarea.inp{resize:vertical;min-height:80px}
+select.inp{cursor:pointer}
+.btn-primary{width:100%;background:var(--rose);color:#fff;border:none;border-radius:10px;padding:.9rem;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s;margin-top:.4rem}
+.btn-primary:hover{background:var(--rose-l)}
+.err-msg{color:#c0392b;font-size:.83rem;margin-bottom:.6rem}
+.back-link{background:none;border:none;color:var(--text-l);cursor:pointer;font-size:.85rem;margin-top:.8rem;font-family:inherit}
+.admin-wrap{min-height:100vh;background:var(--cream)}
+.admin-head{background:var(--rose);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem}
+.admin-head h2{font-family:'Cormorant Garamond',serif;color:#fff;font-size:1.3rem}
+.admin-head button{margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;padding:.4rem .9rem;font-size:.82rem;cursor:pointer;font-family:inherit}
+.admin-inner{max-width:800px;margin:0 auto;padding:1.5rem}
+.new-info{background:#FFF8E1;border:1px solid #FFD54F;border-radius:10px;padding:.8rem 1rem;font-size:.82rem;color:#7B5800;margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
+.new-info b{color:#5A3E00}
+.atabs{display:flex;gap:.5rem;margin-bottom:1.2rem;background:var(--white);border-radius:12px;padding:.4rem;border:1px solid var(--border)}
+.atab{flex:1;background:none;border:none;color:var(--text-l);border-radius:8px;padding:.5rem;font-size:.88rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.atab.active{background:var(--rose);color:#fff}
+.asec{background:var(--white);border-radius:16px;border:1px solid var(--border);padding:1.5rem}
+.asec h3{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--rose);margin-bottom:1.2rem;padding-bottom:.7rem;border-bottom:1px solid var(--border)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.fgrp{margin-bottom:1rem}
+.fgrp label{display:block;font-size:.78rem;font-weight:500;color:var(--text-l);margin-bottom:.35rem;text-transform:uppercase;letter-spacing:.05em}
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:1.5rem;text-align:center;cursor:pointer;transition:border-color .2s,background .2s}
+.upload-zone:hover{border-color:var(--rose);background:var(--rose-pale)}
+.upload-preview{width:100%;max-height:220px;object-fit:contain;border-radius:10px;margin-top:.8rem}
+.btn-add{background:var(--gold);color:#fff;border:none;border-radius:10px;padding:.85rem 2rem;font-size:.95rem;font-weight:600;cursor:pointer;font-family:inherit;transition:background .2s}
+.btn-add:hover{background:var(--gold-l)}
+.btn-add:disabled{opacity:.6;cursor:not-allowed}
+.man-tabs{display:flex;gap:.5rem;margin-bottom:1rem}
+.man-tab{background:none;border:1px solid var(--border);color:var(--text-l);border-radius:8px;padding:.4rem 1rem;font-size:.84rem;cursor:pointer;font-family:inherit;transition:all .2s}
+.man-tab.active{background:var(--rose);border-color:var(--rose);color:#fff}
+.prod-list{display:flex;flex-direction:column;gap:.8rem}
+.prod-item{display:flex;align-items:center;gap:.9rem;background:var(--cream);border-radius:12px;padding:.8rem;border:1px solid var(--border)}
+.prod-item img{width:58px;height:58px;object-fit:cover;border-radius:8px;flex-shrink:0;position:relative}
+.prod-info{flex:1}
+.prod-info h4{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.15rem;display:flex;align-items:center;gap:.5rem}
+.prod-info span{font-size:.74rem;color:var(--text-l)}
+.admin-new-pill{background:linear-gradient(135deg,#E8293A,#C0182A);color:#fff;font-size:.62rem;font-weight:700;letter-spacing:.08em;padding:.18rem .5rem;border-radius:10px;text-transform:uppercase;flex-shrink:0}
+.btn-del{background:none;border:1px solid #e74c3c;color:#e74c3c;border-radius:8px;padding:.35rem .75rem;font-size:.78rem;cursor:pointer;font-family:inherit;transition:background .2s;flex-shrink:0}
+.btn-del:hover{background:#fdeaea}
+@media(max-width:480px){.frow{grid-template-columns:1fr}.modal-btns{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+var WA='918390006651';
+var PASS_HASH='dcc095116391628e85dbe5921683dc74c626780971b95c2e85d28a4453481cd6';
+var SKEY='zg_v2_products';
+var NEW_DAYS=7;
+
+var state={
+  view:'home',products:[],selected:null,
+  adminAuth:false,adminTab:'add',manTab:'sarees',
+  form:{name:'',category:'sarees',desc:'',img:null},
+  preview:null,saving:false,passInput:'',passErr:false
+};
+function isNew(p){
+  if(!p.addedAt)return false;
+  var diff=(Date.now()-p.addedAt)/(1000*60*60*24);
+  return diff<=NEW_DAYS;
+}
+function timeAgo(ts){
+  if(!ts)return '';
+  var s=Math.floor((Date.now()-ts)/1000);
+  if(s<60)return 'just now';
+  var m=Math.floor(s/60);if(m<60)return m+'m ago';
+  var h=Math.floor(m/60);if(h<24)return h+'h ago';
+  var d=Math.floor(h/24);if(d===1)return 'yesterday';
+  if(d<7)return d+' days ago';
+  return new Date(ts).toLocaleDateString('en-IN',{day:'numeric',month:'short'});
+}
+function loadProds(){try{var r=localStorage.getItem(SKEY);state.products=r?JSON.parse(r):[];}catch(e){state.products=[];}}
+function saveProds(){try{localStorage.setItem(SKEY,JSON.stringify(state.products));}catch(e){alert('Storage error. Image may be too large.');}}
+function counts(){return{sarees:state.products.filter(function(p){return p.category==='sarees';}).length,accessories:state.products.filter(function(p){return p.category==='accessories';}).length};}
+function newCounts(){return{sarees:state.products.filter(function(p){return p.category==='sarees'&&isNew(p);}).length,accessories:state.products.filter(function(p){return p.category==='accessories'&&isNew(p);}).length};}
+function esc(s){return(s||'').replace(/&/g,'').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function goto(v){
+  if(v==='admin'&&!state.adminAuth){state.view='adminLogin';}
+  else{state.view=v;}
+  window.scrollTo(0,0);render();
+}
+function selectProd(id){state.selected=state.products.find(function(p){return p.id===id;})||null;render();}
+function closeModal(e){if(!e||e.target.classList.contains('modal-overlay')){state.selected=null;render();}}
+function confirmItem(){if(state.selected){sendWA(state.selected);}}
+function sendWA(p){
+  var msg=encodeURIComponent('Namaste! \u{1F64F}\n\nI saw this item on *Vrundhavan Collection* and I am interested!\n\n*Item:* '+p.name+'\n*Category:* '+(p.category==='sarees'?'Vrundhavan':'Accessory')+'\n\nCould you please share more details, availability, and price?');
+  window.open('https://wa.me/'+WA+'?text='+msg,'_blank');
+}
+async function doLogin(){
+  var inp=document.getElementById('passInp');
+  var val=inp?inp.value:state.passInput;
+  var encoder=new TextEncoder();
+  var data=encoder.encode(val);
+  var hashBuffer=await crypto.subtle.digest('SHA-256',data);
+  var hashArray=Array.from(new Uint8Array(hashBuffer));
+  var hashHex=hashArray.map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+  var stored=localStorage.getItem('zg_pass')||PASS_HASH;
+  if(hashHex===stored){state.adminAuth=true;state.passErr=false;state.passInput='';state.view='admin';state.adminTab='add';render();}
+  else{state.passErr=true;render();}
+}
+function addProduct(){
+  var f=state.form;
+  if(!f.name.trim()||!f.img){alert('Please enter an item name and upload a photo.');return;}
+  state.saving=true;render();
+  setTimeout(function(){
+    var p={id:Date.now().toString(),name:f.name.trim(),category:f.category,desc:f.desc.trim(),img:f.img,addedAt:Date.now()};
+    state.products.unshift(p);
+    saveProds();
+    state.form={name:'',category:'sarees',desc:'',img:null};state.preview=null;
+    state.saving=false;render();
+    var fi=document.getElementById('fileInp');if(fi)fi.value='';
+    alert('\u2728 Item added! It will show a NEW badge for '+NEW_DAYS+' days.');
+  },80);
+}
+function deleteProduct(id){
+  if(!confirm('Delete this item permanently?'))return;
+  state.products=state.products.filter(function(p){return p.id!==id;});
+  saveProds();render();
+}
+function handleFile(input){if(input.files&&input.files[0])compressAndSet(input.files[0]);}
+function handleDrop(e){e.preventDefault();var f=e.dataTransfer.files[0];if(f)compressAndSet(f);}
+function compressAndSet(file){
+  var reader=new FileReader();
+  reader.onload=function(ev){
+    var img=new Image();
+    img.onload=function(){
+      var c=document.createElement('canvas');
+      var MAX=900;var w=img.width;var h=img.height;
+      if(w>MAX||h>MAX){if(w>h){h=Math.round(h*MAX/w);w=MAX;}else{w=Math.round(w*MAX/h);h=MAX;}}
+      c.width=w;c.height=h;c.getContext('2d').drawImage(img,0,0,w,h);
+      var compressed=c.toDataURL('image/jpeg',0.78);
+      state.form.img=compressed;state.preview=compressed;render();
+    };
+    img.src=ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+function setFormField(key,val){state.form[key]=val;}
+function setManTab(t){state.manTab=t;render();}
+function setAdminTab(t){state.adminTab=t;render();}
+
+function render(){
+  var app=document.getElementById('app');
+  var s=state;var c=counts();var nc=newCounts();
+  var modal='';
+  if(s.selected){
+    var isnew=isNew(s.selected);
+    modal='<div class="modal-overlay" onclick="closeModal(event)"><div class="modal" onclick="event.stopPropagation()">'
+      +'<div class="modal-img-wrap"><img src="'+esc(s.selected.img)+'" alt="'+esc(s.selected.name)+'"/>'
+      +(isnew?'<div class="modal-new-badge">\u2605 New Arrival</div>':'')
+      +'</div><div class="modal-body">'
+      +'<div class="modal-cat">'+(s.selected.category==='sarees'?'\u2736 Saree':'\u25C8 Accessory')+'</div>'
+      +'<div class="modal-title">'+esc(s.selected.name)+'</div>'
+      +(s.selected.addedAt?'<div class="modal-added">Added '+timeAgo(s.selected.addedAt)+'</div>':'')
+      +(s.selected.desc?'<div class="modal-desc">'+esc(s.selected.desc)+'</div>':'')
+      +'<div class="modal-msg"><strong>\u2728 Love this piece?</strong>Confirm to enquire directly on WhatsApp, or keep browsing our collection!</div>'
+      +'<div class="modal-btns">'
+      +'<button class="btn-see" onclick="closeModal()">See More \ud83d\udc40</button>'
+      +'<button class="btn-confirm" onclick="confirmItem()">'
+      +'<svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.117.549 4.099 1.508 5.821L0 24l6.335-1.483A11.944 11.944 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.859 0-3.595-.496-5.088-1.362l-.361-.214-3.762.88.933-3.667-.236-.374A9.945 9.945 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>'
+      +' Confirm on WhatsApp</button>'
+      +'</div></div></div></div>';
+  }
+  if(s.view==='home'){
+    app.innerHTML='<nav class="nav"><div class="nav-brand" onclick="goto(\'home\')">Vrundhavan <span></span> Collection</div>'
+      +'<button class="nav-admin" onclick="goto(\'adminLogin\')">&#9881; Admin</button></nav>'
+      +'<div class="home-hero"><div class="ornament">&#8212; &#10022; &#8212;</div>'
+      +'<h1>Vrundhavan Collection</h1><p>Handpicked sarees &amp; accessories curated just for you</p>'
+      +'<div class="home-divider"><span>explore our collection</span></div></div>'
+      +'<div class="category-grid">'
+      +'<button class="cat-card cat-sarees" onclick="goto(\'sarees\')">'
+      +'<div class="cat-inner"><div class="cat-emoji">\ud83e\udd7b</div>'
+      +'<div class="cat-name">Sarees</div>'
+      +'<div class="cat-count">'+c.sarees+' items'+(nc.sarees>0?' &bull; <b style="color:var(--gold-l)">'+nc.sarees+' NEW</b>':'')+'</div>'
+      +'<div class="cat-arrow">&rarr;</div></div></button>'
+      +'<button class="cat-card cat-acc" onclick="goto(\'accessories\')">'
+      +'<div class="cat-inner"><div class="cat-emoji">\ud83d\udc8e</div>'
+      +'<div class="cat-name">Accessories</div>'
+      +'<div class="cat-count">'+c.accessories+' items'+(nc.accessories>0?' &bull; <b style="color:var(--gold-l)">'+nc.accessories+' NEW</b>':'')+'</div>'
+      +'<div class="cat-arrow">&rarr;</div></div></button>'
+      +'</div>'+modal;
+    return;
+  }
+  if(s.view==='sarees'||s.view==='accessories'){
+    var title=s.view==='sarees'?'Sarees Collection':'Accessories';
+    var sub=s.view==='sarees'?'Elegance woven in every thread':'Complete your ensemble';
+    var catItems=s.products.filter(function(p){return p.category===s.view;});
+    var gridHTML;
+    if(catItems.length===0){
+      gridHTML='<div class="empty-state"><div class="ei">'+(s.view==='sarees'?'\ud83e\udd7b':'\ud83d\udc8e')+'</div><p>New arrivals coming soon!<br/>Check back shortly.</p></div>';
+    } else {
+      var cards=catItems.map(function(p){
+        var isnew=isNew(p);
+        return '<div class="product-card" onclick="selectProd(\''+p.id+'\')">'
+          +(isnew?'<div class="new-badge">\u2605 New</div>':'')
+          +'<img src="'+esc(p.img)+'" alt="'+esc(p.name)+'"/>'
+          +'<div class="pc-body"><h3>'+esc(p.name)+'</h3>'
+          +(p.desc?'<p>'+esc(p.desc)+'</p>':'')
+          +'<div class="pc-tap">Tap to enquire &rarr;</div></div></div>';
+      }).join('');
+      gridHTML='<div class="product-grid">'+cards+'</div>';
+    }
+    app.innerHTML='<nav class="nav">'
+      +'<button class="nav-back" onclick="goto(\'home\')">&larr; Back</button>'
+      +'<div class="nav-brand" onclick="goto(\'home\')">Vrundhavan <span></span> Collection</div>'
+      +'<button class="nav-admin" onclick="goto(\'adminLogin\')">&#9881;</button></nav>'
+      +'<div class="page-header"><h2>'+title+'</h2><p>'+sub+'</p></div>'
+      +gridHTML+modal;
+    return;
+  }
+  if(s.view==='adminLogin'){
+    app.innerHTML='<div class="admin-login-wrap"><div class="al-card">'
+      +'<div style="font-size:2.5rem;margin-bottom:.8rem">\ud83d\udd10</div>'
+      +'<h2>Admin Access</h2><p>Enter your password to manage the store</p>'
+      +'<input class="inp" type="password" id="passInp" placeholder="Enter admin password"'
+      +' value="'+esc(s.passInput)+'" onkeydown="if(event.key===\'Enter\')doLogin()" oninput="state.passInput=this.value" style="margin-bottom:.7rem"/>'
+      +(s.passErr?'<div class="err-msg">Incorrect password. Please try again.</div>':'')
+      +'<button class="btn-primary" onclick="doLogin()">Login</button>'
+      +'<br/><button class="back-link" onclick="goto(\'home\')">&larr; Back to store</button>'
+      +'</div></div>';
+    setTimeout(function(){var el=document.getElementById('passInp');if(el)el.focus();},50);
+    return;
+  }
+  if(s.view==='admin'&&s.adminAuth){
+    var manItems=s.products.filter(function(p){return p.category===s.manTab;});
+    var addHTML='<div class="new-info">&#128276; <div><b>Auto NEW badge:</b> Every item you add will automatically show a "NEW" badge for <b>'+NEW_DAYS+' days</b>. After that it disappears on its own.</div></div>'
+      +'<div class="frow">'
+      +'<div class="fgrp"><label>Item Name *</label>'
+      +'<input class="inp" type="text" placeholder="e.g. Banarasi Silk Saree" value="'+esc(s.form.name)+'" oninput="setFormField(\'name\',this.value)"/></div>'
+      +'<div class="fgrp"><label>Category *</label>'
+      +'<select class="inp" onchange="setFormField(\'category\',this.value)">'
+      +'<option value="sarees"'+(s.form.category==='sarees'?' selected':'')+'>Sarees</option>'
+      +'<option value="accessories"'+(s.form.category==='accessories'?' selected':'')+'>Accessories</option>'
+      +'</select></div></div>'
+      +'<div class="fgrp"><label>Description (optional)</label>'
+      +'<textarea class="inp" placeholder="e.g. Pure silk with gold zari border..." oninput="setFormField(\'desc\',this.value)">'+esc(s.form.desc)+'</textarea></div>'
+      +'<div class="fgrp"><label>Photo *</label>'
+      +'<div class="upload-zone" onclick="document.getElementById(\'fileInp\').click()" ondragover="event.preventDefault()" ondrop="handleDrop(event)">'
+      +'<input type="file" id="fileInp" accept="image/*" onchange="handleFile(this)" style="display:none"/>'
+      +(s.preview
+        ?'<img src="'+s.preview+'" class="upload-preview" alt="Preview"/><p style="color:var(--text-l);font-size:.78rem;margin-top:.5rem">Click to change photo</p>'
+        :'<div style="font-size:2rem;margin-bottom:.5rem">\ud83d\udcf8</div><p style="color:var(--text-l);font-size:.9rem">Click or drag to upload photo</p>')
+      +'</div></div>'
+      +'<button class="btn-add" onclick="addProduct()"'+(s.saving?' disabled':'')+'>'+(s.saving?'Saving...':'+ Add Item')+'</button>';
+    var manHTML='<div class="man-tabs">'
+      +'<button class="man-tab'+(s.manTab==='sarees'?' active':'')+'" onclick="setManTab(\'sarees\')">Sarees ('+c.sarees+')</button>'
+      +'<button class="man-tab'+(s.manTab==='accessories'?' active':'')+'" onclick="setManTab(\'accessories\')">Accessories ('+c.accessories+')</button>'
+      +'</div><div class="prod-list">'
+      +(manItems.length===0?'<p style="color:var(--text-l);text-align:center;padding:1.5rem 0">No items in this category yet.</p>'
+        :manItems.map(function(p){
+          var isnew=isNew(p);
+          return '<div class="prod-item">'
+            +'<img src="'+esc(p.img)+'" alt="'+esc(p.name)+'"/>'
+            +'<div class="prod-info"><h4>'+esc(p.name)+(isnew?'<span class="admin-new-pill">NEW</span>':'')+'</h4>'
+            +'<span>'+(p.category==='sarees'?'\ud83e\udd7b Saree':'\ud83d\udc8e Accessory')+' &bull; Added '+timeAgo(p.addedAt)+'</span></div>'
+            +'<button class="btn-del" onclick="deleteProduct(\''+p.id+'\')">Delete</button>'
+            +'</div>';
+        }).join(''))
+      +'</div>';
+    app.innerHTML='<div class="admin-wrap">'
+      +'<div class="admin-head"><h2>\ud83d\uded2 Vrundhavan Collection &mdash; Admin</h2>'
+      +'<button onclick="goto(\'home\')">View Store &rarr;</button></div>'
+      +'<div class="admin-inner">'
+      +'<div class="atabs">'
+      +'<button class="atab'+(s.adminTab==='add'?' active':'')+'" onclick="setAdminTab(\'add\')">+ Add Item</button>'
+      +'<button class="atab'+(s.adminTab==='manage'?' active':'')+'" onclick="setAdminTab(\'manage\')">Manage Items</button>'
+      +'</div>'
+      +'<div class="asec">'+(s.adminTab==='add'?'<h3>Add New Item</h3>'+addHTML:'<h3>Manage Items</h3>'+manHTML)+'</div>'
+      +'</div></div>';
+    return;
+  }
+  goto('home');
+}
+loadProds();render();
+</script>
+</body>
+</html>
