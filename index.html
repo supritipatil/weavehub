@@ -159,7 +159,7 @@ function selectProd(id){state.selected=state.products.find(function(p){return p.
 function closeModal(e){if(!e||e.target.classList.contains('modal-overlay')){state.selected=null;render();}}
 function confirmItem(){if(state.selected){sendWA(state.selected);}}
 function sendWA(p){
-  var msg=encodeURIComponent('Namaste! \u{1F64F}\n\nI saw this item on *Vrundhavan Collection* and I am interested!\n\n*Item:* '+p.name+'\n*Category:* '+(p.category==='sarees'?'Vrundhavan':'Accessory')+'\n\nCould you please share more details, availability, and price?');
+  var msg=encodeURIComponent('Namaste! \u{1F64F}\n\nI saw this item on *Vrundhavan Collection* and I am interested!\n\n*Item:* '+p.name+'\n*Category:* '+(p.category==='sarees'?'Sarees':'Accessory')+'\n\nCould you please share more details, availability, and price?');
   window.open('https://wa.me/'+WA+'?text='+msg,'_blank');
 }
 async function doLogin(){
